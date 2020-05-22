@@ -1,17 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import App from './App'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const notes = [
+  {
+    id: 1,
+    content: 'HTML is easy',
+    date: '2019-08-30',
+    important: true
+  },
+  {
+    id: 2,
+    content: 'Browser can execute only JavaScript',
+    date: '2019-08-30',
+    important: false
+  },
+  {
+    id: 3,
+    content: 'Get and Post are the most important methods of HTTP protocol',
+    date: '2019-08-30',
+    important: true
+  }
+]
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+
+ReactDOM.render(<App notes={notes}/>, document.getElementById('root'));
