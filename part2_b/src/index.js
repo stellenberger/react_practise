@@ -10,6 +10,8 @@ const App = () => {
 
   const [ newName, setNewName ] = useState('')
 
+  const [ filterResults, setFilterResults ] = useState([])
+
   const checkPersonExists = () => {
     let boolean 
     persons.filter(function(person) {
@@ -25,7 +27,6 @@ const App = () => {
   const addName = (event) => {
     event.preventDefault()
     if(!checkPersonExists()) {
-      console.log('This returned false and worked')
       alert(`${newName} is already on the list`)
       setNewName('')
     } else {
@@ -50,9 +51,22 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
+  const handleFilterResults = (event) => {
+    console.log(event.target.value)
+    setFilterResults(persons.filter(function(person) {
+      return person.name === event.target.value
+    }))
+    console.log(filterResults)
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        Search by name:
+        <input type="text" onChange={handleFilterResults}/>
+        {filterResults.map((result) => <li key={result.id}>{result.name}: {result.number}</li>)}
+      </div>
       <form onSubmit={addName}>
         <div>
           Name: <input value={newName} onChange={handleNameChange}/>
