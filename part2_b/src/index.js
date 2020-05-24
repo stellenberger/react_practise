@@ -54,7 +54,7 @@ const App = () => {
   const handleFilterResults = (event) => {
     console.log(event.target.value)
     setFilterResults(persons.filter(function(person) {
-      return person.name === event.target.value
+      return person.name.includes(event.target.value) 
     }))
     console.log(filterResults)
   }
