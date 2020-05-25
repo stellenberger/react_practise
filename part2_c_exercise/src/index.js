@@ -4,26 +4,22 @@ import axios from 'axios'
 
 const App = () => {
   
-  const [countrySearch, setCountrySearch] = useState([])
+  const [countrySearch, setCountrySearch] = useState('')
   
-  const hook = () => {
-    console.log('effect')
-    axios.get("https://restcountries.eu/rest/v2/name/eesti").then(response => {
-      console.log(response.data)
-      setCountrySearch(response.data)
-    })
-  }
+  const [countryList, setCountryList] = useState([])
 
-  useEffect(hook, [])
-  console.log(countrySearch, '___')
+  useEffect(() => {
+    axios.get("https://restcountries.eu/rest/v2/name/" + countrySearch).then(response => {
+      setCountryList(response.data)
+    })
+  }, [countrySearch])
+  
   return (
     <div>
-      <h1>{countrySearch.map((country => country.name))}</h1>
+      <input value={countrySearch} onChange={event => setCountrySearch(event.target.value)}/>
+      <div>{countryList.map((country => <p>{country.name}</p>))}</div>
     </div>
   )
 }
 
-
 ReactDOM.render(<App />, document.getElementById('root'));
-
-
