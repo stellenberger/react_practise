@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import ReactDOM from 'react-dom';
 
 
@@ -89,10 +90,17 @@ const NewPersonForm = ({persons, setPersons}) => {
 }
 
 const App = () => {
-  const [ persons, setPersons ] = useState([
-    {name: 'Arto Hellas', number: '999', id: 0}
-  ])
-
+  const [ persons, setPersons ] = useState([])
+  const hook = () => {
+    console.log('effect')
+    axios.get("http://localhost:3001/persons")
+    .then(response => {
+      console.log('promise fulfilled')
+      setPersons(response.data)
+    })
+  }
+  
+  useEffect(hook, [])
   return (
     <div>
       <h2>Phonebook</h2>
