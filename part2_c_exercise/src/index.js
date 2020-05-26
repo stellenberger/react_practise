@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios'
+require('dotenv').config();
 
 const DisplayCountryList = ({countryList, setCountrySearch}) => {
   return (
@@ -15,7 +16,31 @@ const DisplayCountryList = ({countryList, setCountrySearch}) => {
   )
 }
 
+const DisplayWeather = ({capitalCity}) => {
+  const [ weather, setWeather ] = useState([])
+  
+  useEffect(() => {
+    axios.get("http://api.weatherstack.com/current?access_key=" 
+      + process.env.REACT_APP_API_KEY 
+      + "&query=" 
+      + capitalCity)
+      .then(response => {
+        console.log("storing the data")
+      setWeather(response.data)
+      console.log('data stored')
+      console.log(response.data.current.observation_time)
+    })
+  }, [capitalCity])
+
+  return (
+    <div>
+      <p>Weather: {weather.current.observation_time}</p>
+    </div>
+  )
+}
+
 const DisplayCountry = ({countryList}) => {
+  
   return (
     <div>
       <h1>Name: {countryList[0].name}</h1>
@@ -23,13 +48,13 @@ const DisplayCountry = ({countryList}) => {
       <p>Region: {countryList[0].region}</p>
       <p>Population: {countryList[0].population}</p>
       <img src={countryList[0].flag} alt="" width="200px" height="auto"/>
+      {/* <DisplayWeather capitalCity={countryList[0].capital}/> */}
     </div>
   )
 }
+
 const App = () => {
-  
   const [countrySearch, setCountrySearch] = useState('')
-  
   const [countryList, setCountryList] = useState([])
 
   useEffect(() => {
