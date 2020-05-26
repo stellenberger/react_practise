@@ -17,7 +17,7 @@ const DisplayCountryList = ({countryList, setCountrySearch}) => {
 }
 
 const DisplayWeather = ({capitalCity}) => {
-  const [ weather, setWeather ] = useState([])
+  const [ weather, setWeather ] = useState(null)
   
   useEffect(() => {
     axios.get("http://api.weatherstack.com/current?access_key=" 
@@ -34,7 +34,7 @@ const DisplayWeather = ({capitalCity}) => {
 
   return (
     <div>
-      <p>Weather: {weather.current.observation_time}</p>
+      {weather && <p>Weather: {weather.current.observation_time}</p>}
     </div>
   )
 }
@@ -48,7 +48,7 @@ const DisplayCountry = ({countryList}) => {
       <p>Region: {countryList[0].region}</p>
       <p>Population: {countryList[0].population}</p>
       <img src={countryList[0].flag} alt="" width="200px" height="auto"/>
-      {/* <DisplayWeather capitalCity={countryList[0].capital}/> */}
+      <DisplayWeather capitalCity={countryList[0].capital}/>
     </div>
   )
 }
