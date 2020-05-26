@@ -2,10 +2,15 @@ import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios'
 
-const DisplayCountryList = ({countryList}) => {
+const DisplayCountryList = ({countryList, setCountrySearch}) => {
   return (
     <div>
-      {countryList.map((country => <p>{country.name}</p>))}
+      {countryList.map((country => 
+        <p>
+          {country.name}
+          <button onClick={event => setCountrySearch(event.target.value)} value={country.name}>Show more...</button>
+        </p>
+      ))}
     </div>
   )
 }
@@ -37,7 +42,7 @@ const App = () => {
     <div>
       <input value={countrySearch} onChange={event => setCountrySearch(event.target.value)}/>
       <div>{countryList.length === 1 ? 
-        <DisplayCountry countryList={countryList}/> : <DisplayCountryList countryList={countryList}/>}
+        <DisplayCountry countryList={countryList}/> : <DisplayCountryList countryList={countryList} setCountrySearch={setCountrySearch}/>}
       </div>
     </div>
   )
