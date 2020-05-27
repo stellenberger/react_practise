@@ -55,7 +55,7 @@ const NewPersonForm = ({persons, setPersons}) => {
       const nameObject = {
         name: newName,
         number: newNumber,
-        id: persons.length + 1
+        id: persons[persons.length - 1].id + 1
       }
       phonebookService
         .create(nameObject)
