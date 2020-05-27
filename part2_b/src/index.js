@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import ReactDOM from 'react-dom';
 import phonebookService from './services/phonebook'
+import './index.css'
 
 
 const Persons = ({persons, setPersons}) => {
