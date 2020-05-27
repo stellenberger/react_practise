@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import ReactDOM from 'react-dom';
+import phonebookService from './services/phonebook'
 
 
 const Persons = ({persons, setPersons}) => {
+  const deletePerson = (person) => {
+    phonebookService
+      .destroy(person)
+      .then(setPersons(persons.filter(p => p.id !== person.id)))
+    alert(`You deleted ${person.name} from the Phonebook`)
+  }
+  
   return (
     <div>
-      {persons.map((person) => <li key={person.id}>{person.name}: {person.number}</li>)}
+      {persons.map((person) => 
+      <li key={person.id}>
+        {person.name}: {person.number} <button onClick={() => deletePerson(person)}>Delete</button>
+      </li>)}
     </div>
   )
 }
@@ -46,9 +57,14 @@ const NewPersonForm = ({persons, setPersons}) => {
         number: newNumber,
         id: persons.length + 1
       }
-      setPersons(persons.concat(nameObject))
-      setNewName('')
-      setNewNumber('')
+      phonebookService
+        .create(nameObject)
+        .then(returnedName => {
+          setPersons(persons.concat(returnedName))
+          setNewName('')
+          setNewNumber('')
+        })
+      
     }
   }
 
@@ -91,16 +107,13 @@ const NewPersonForm = ({persons, setPersons}) => {
 
 const App = () => {
   const [ persons, setPersons ] = useState([])
-  const hook = () => {
-    console.log('effect')
-    axios.get("http://localhost:3001/persons")
-    .then(response => {
-      console.log('promise fulfilled')
-      setPersons(response.data)
-    })
-  }
   
-  useEffect(hook, [])
+  useEffect(() => {
+    phonebookService
+      .getAll()
+      .then(initialPhonebook => setPersons(initialPhonebook))
+  }, [])
+
   return (
     <div>
       <h2>Phonebook</h2>
