@@ -49,8 +49,16 @@ const NewPersonForm = ({persons, setPersons}) => {
   const addName = (event) => {
     event.preventDefault()
     if(!checkPersonExists()) {
-      alert(`${newName} is already on the list`)
+      alert(`${newName} is already on the list. Would you like to replace the old number with a new one?`)
+      const originalPerson = persons.find(person => person.name === newName)
+      const changedPerson = { ...originalPerson, number: newNumber}
+      phonebookService
+        .update(originalPerson.id, changedPerson)
+        .then(returnedPerson => {
+          setPersons(persons.map(person => person.name !== newName ? person : returnedPerson))
+        })
       setNewName('')
+      setNewNumber('')
     } else {
       const nameObject = {
         name: newName,
@@ -64,7 +72,6 @@ const NewPersonForm = ({persons, setPersons}) => {
           setNewName('')
           setNewNumber('')
         })
-      
     }
   }
 
