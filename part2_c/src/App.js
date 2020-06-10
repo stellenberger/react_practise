@@ -4,6 +4,7 @@ import Note from './components/Note'
 import noteService from './services/notes'
 import './index.css'
 
+
 const Notification = ({ message }) => {
   if(message === null) {
     return null
