@@ -1,5 +1,6 @@
 import React from 'react';
 import Ninjas from './components/Ninjas';
+import AddNinja from './components/AddNinja'
 
 // this is called a container component as it has state
 class App extends React.Component {
@@ -16,6 +17,7 @@ class App extends React.Component {
         <h1>My first React app!</h1>
         <p>Welcome!</p>
         <Ninjas ninjas={this.state.ninjas}/>
+        <AddNinja/>
       </div>
     );
   }
