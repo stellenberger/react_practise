@@ -33,11 +33,26 @@
       handleCopy = (e) => {
         console.log('Try being original for once!')
       }
+
+      handleChange = (e) => {
+        this.setState({
+          name: e.target.value
+        })
+      }
+
+      handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('form submitted', this.state.name)
+      }
       render() {
         return (
           <div className="app-content">
             <h1>Hello world</h1>
             <p>My name is: { this.state.name } and i am { this.state.age } </p>
+            <form onSubmit={this.handleSubmit}>
+              <input type="text" onChange={this.handleChange}/>  
+              <button type="submit">Submit</button>
+            </form>
             <button onClick={this.handleClick}>Click me</button>
             <button onMouseOver={this.handleMouseOver}>Hover me</button>
             <p onCopy={this.handleCopy}>What we think, we become</p>
