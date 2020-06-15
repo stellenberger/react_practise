@@ -1,0 +1,6 @@
+If you are reading this, you are in my react-practise directory and probably looking at all the files that have contributed to my learning of React, how exciting! If you are still reading by this point, let me start by saying this is simply a collection of my practise files, and by no means exhaustive of the work that I have completed in my journey in React, much of it is also done offline. 
+
+Why React? Having not learned a JavaScript framework yet, I opted to learn React as my first due to it's demand and popularity at the time of writing this README, and even though a Ruby developer and confident in Ruby on Rails, I wanted a JS framework under my belt to feel comfortable saying I am a Full-Stack Developer.
+
+The files consist of exercises I have found on the internet, by mostly accomplished courses and sometimes YouTube tutorials. I use a mix of modern React Syntax with the use of Hooks in functions and the older class syntax, and am comfortable in writing both by the time of this README. These courses include React testing frameworks, the use of Redux for state management, using build with React, understanding Babel and its role in transpiling code, modern JS ES6 syntax and its importance (arrow functions and why they're preferred, spread syntax, object destructuring), the use of Node and even creating JSON databases in a local server. 
+
