@@ -1,4 +1,4 @@
-const Movie = require('../models.movie-model')
+const Movie = require('../models/movie-model')
 
 createMovie = (req, res) => {
   const body = req.body
@@ -82,6 +82,7 @@ deleteMovie = async (req, res) => {
         .status(404)
         .json({ success: false, error: `Movie not found!` })
     }
+
     return res.status(200).json({ success: true, data: movie })
   }).catch(err => console.log(err))
 }
