@@ -15,14 +15,28 @@ import {
   Text,
   StatusBar,
   TextInput,
+  Button,
+  onPressLearnMore
 } from 'react-native';
+import axios from 'axios';
 
-import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
+import { Header, Colors } from 'react-native/Libraries/NewAppScreen';
 
 const App = () => {
   const [email, setEmail] = React.useState('example@example.com');
   const [password, setPassword] = React.useState('password');
 
+  const handleSubmit = () => {
+    console.log(email)
+    console.log(password)
+    axios.get("http://localhost:3001/api/v1/users", { withCredentials: true })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -44,16 +58,22 @@ const App = () => {
             <View style={styles.authentication}>
               <Text>Email</Text>
               <TextInput
-                style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
                 onChangeText={(text) => onChangeText(text)}
                 value={email}
               />
               <Text>Password</Text>
               <TextInput
-                style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
                 onChangeText={(text) => onChangeText(text)}
                 value={password}
                 secureTextEntry={true}
+              />
+              <Button
+                onPress={handleSubmit}
+                title="Log In"
+                color="#841584"
+                accessibilityLabel="Learn more about this purple button"
               />
             </View>
           </View>
@@ -69,7 +89,7 @@ const styles = StyleSheet.create({
   },
   authentication: {
     padding: 20,
-    borderColor: 'black',
+    borderColor: 'pink',
     borderWidth: 1,
     borderRadius: 5,
     margin: 5,
