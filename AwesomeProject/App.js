@@ -14,17 +14,15 @@ import {
   View,
   Text,
   StatusBar,
+  TextInput,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
 
-const App: () => React$Node = () => {
+const App = () => {
+  const [email, setEmail] = React.useState('example@example.com');
+  const [password, setPassword] = React.useState('password');
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -40,31 +38,24 @@ const App: () => React$Node = () => {
           )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
+              <Text style={styles.sectionTitle}>Welcome</Text>
+              <Text style={styles.sectionDescription}>Hello World!</Text>
             </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
+            <View style={styles.authentication}>
+              <Text>Email</Text>
+              <TextInput
+                style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                onChangeText={(text) => onChangeText(text)}
+                value={email}
+              />
+              <Text>Password</Text>
+              <TextInput
+                style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                onChangeText={(text) => onChangeText(text)}
+                value={password}
+                secureTextEntry={true}
+              />
             </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -75,6 +66,13 @@ const App: () => React$Node = () => {
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
+  },
+  authentication: {
+    padding: 20,
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 5,
+    margin: 5,
   },
   engine: {
     position: 'absolute',
