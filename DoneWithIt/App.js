@@ -1,20 +1,25 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, SafeAreaView, TextInput } from "react-native";
 
 export default function App() {
+  const [value, onChangeText] = React.useState("useless placeholder");
   return (
-    <View style={styles.container}>
-      <Text>Hello World!</Text>
+    <SafeAreaView style={styles.container}>
+      <Text>Hello React Native</Text>
       <StatusBar style="auto" />
-    </View>
+      <TextInput
+        onChangeText={(text) => onChangeText(text)}
+        value={value}
+      ></TextInput>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "dodgerblue",
     alignItems: "center",
     justifyContent: "center",
   },
